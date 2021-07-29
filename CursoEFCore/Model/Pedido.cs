@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using CursoEFCore.ValueObject;
 
-namespace CursoEFCore.model
+namespace CursoEFCore.Model
 {
     public class Pedido
     {
@@ -15,6 +15,6 @@ namespace CursoEFCore.model
         public StatusPedido Status { get; set; }
         public string Observacao { get; set; }
 
-        public ICollection<PedidoItem> Pedidos { get; set; }
+        public ICollection<PedidoItem> Itens { get; set; }
     }
 }

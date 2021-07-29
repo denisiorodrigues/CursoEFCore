@@ -1,5 +1,5 @@
 using System.Reflection;
-namespace CursoEFCore.model
+namespace CursoEFCore.Model
 {
     public class Cliente
     {
