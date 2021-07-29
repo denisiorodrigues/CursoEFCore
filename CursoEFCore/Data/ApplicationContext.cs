@@ -12,7 +12,7 @@ namespace CursoEFCore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=CursoEFCore;User Id=SA;Password=*UHB*UHB");
+            optionsBuilder.UseSqlServer("Server=172.27.224.1;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
