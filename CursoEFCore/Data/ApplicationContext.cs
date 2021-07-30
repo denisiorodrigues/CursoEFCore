@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using CursoEFCore.Model;
+using Microsoft.Extensions.Logging;
 
 namespace CursoEFCore.Data
 {
     public class ApplicationContext : DbContext
     {
+        //Adicionando log na aplicação
+        private static readonly ILoggerFactory _logger = LoggerFactory.Create(p => p.AddConsole());
+
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
@@ -12,7 +16,10 @@ namespace CursoEFCore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=172.27.224.1;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
+            optionsBuilder
+            .UseLoggerFactory(_logger)
+            .EnableSensitiveDataLogging()
+            .UseSqlServer("Server=172.27.224.1;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

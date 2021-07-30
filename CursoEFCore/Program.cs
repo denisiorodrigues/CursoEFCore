@@ -11,7 +11,55 @@ namespace App
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello World!");
-            InserindoDados();
+            //InserindoDados();
+            InserirDadosEmMassa();
+        }
+
+        private static void InserirDadosEmMassa()
+        {
+            var produto = new Produto()
+            {
+                Descricao = "Produto teste dia 2",
+                CodigoDeBarras = "12332145644",
+                Valor = 50m,
+                TipoProduto = TipoProduto.Embalagem,
+                Ativo = true
+            };
+
+            var cliente = new Cliente()
+            {
+                Nome = "Rafael Almeida",
+                CEP = "60336100",
+                Cidade = "Fortaçeza",
+                Estado = "CE",
+                Telefone = "85987878787"
+            };
+
+            var listaClientes = new [] 
+            {
+                new Cliente()
+                {
+                    Nome = "Luiz Profilio",
+                    CEP = "60336100",
+                    Cidade = "Fortaçeza",
+                    Estado = "CE",
+                    Telefone = "85987878787"
+                },
+                new Cliente()
+                {
+                    Nome = "Rafael Cavalcante",
+                    CEP = "60336100",
+                    Cidade = "Fortaçeza",
+                    Estado = "CE",
+                    Telefone = "85987878787"
+                }
+            };
+
+            using var db = new ApplicationContext();
+            //db.AddRange(produto, cliente);
+            db.Clientes.AddRange(listaClientes);
+            var resultados = db.SaveChanges();
+            Console.WriteLine($"Total de Registro(s) =  {resultados}");
         }
 
         private static void InserindoDados()
