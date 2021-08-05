@@ -27,7 +27,7 @@ namespace CursoEFCore.Data
                 maxRetryCount: 2, // Configuração máxima de tentativa de reconexão
                 maxRetryDelay: TimeSpan.FromSeconds(5), // enquanto tempo deve esperar para tentar novamente
                 errorNumbersToAdd: null // Códigos de erros adicionais para o entity framework pode interpretar
-            ));
+            ).MigrationsHistoryTable("curso_ef_core"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
