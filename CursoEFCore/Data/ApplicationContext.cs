@@ -13,13 +13,14 @@ namespace CursoEFCore.Data
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<PedidoItem> PedidoItens { get; set; }
+        public DbSet<Chamado> Chamados { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
             .UseLoggerFactory(_logger)
             .EnableSensitiveDataLogging()
-            .UseSqlServer("Server=172.27.224.1;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
+            .UseSqlServer("Server=localhost;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
