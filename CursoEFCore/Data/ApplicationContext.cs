@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using CursoEFCore.Model;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System;
 
 namespace CursoEFCore.Data
 {
@@ -21,7 +22,12 @@ namespace CursoEFCore.Data
             optionsBuilder
             .UseLoggerFactory(_logger)
             .EnableSensitiveDataLogging()
-            .UseSqlServer("Server=localhost;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB");
+            .UseSqlServer("Server=localhost;Database=CursoEFCore;User Id=SA;Password=8uhb*UHB", 
+            p => p.EnableRetryOnFailure(
+                maxRetryCount: 2, // Configuração máxima de tentativa de reconexão
+                maxRetryDelay: TimeSpan.FromSeconds(5), // enquanto tempo deve esperar para tentar novamente
+                errorNumbersToAdd: null // Códigos de erros adicionais para o entity framework pode interpretar
+            ));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
