@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using CursoEFCore.Model;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace CursoEFCore.Data
 {
@@ -28,6 +29,23 @@ namespace CursoEFCore.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
             
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder)
+        {
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entity.GetProperties().Where(p => p.ClrType == typeof(string));
+
+                foreach (var property in properties)
+                {
+                    if(string.IsNullOrEmpty(property.GetColumnType())
+                        && !property.GetMaxLength().HasValue)
+                        {
+                            property.SetColumnType("VARCHAR(100)");
+                        }
+                }
+            }
         }
     }
 }
